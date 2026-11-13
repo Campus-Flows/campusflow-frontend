@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="description" content="Campus Flow에서 건물과 강의실을 선택하고 월요일부터 금요일까지의 수업 시간표를 확인하세요.">
+  <title>강의실 시간표 · Campus Flow</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">시간표로 이동</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" aria-label="Campus Flow 홈">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="currentColor"/><path d="M27 12H17a5 5 0 0 0-5 5v6a5 5 0 0 0 5 5h5M19 19h9m-9 5h7" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="28" cy="28" r="3" fill="#a5c5ff"/></svg>
+        <span>Campus<span class="brand-flow">Flow</span></span>
+      </a>
+      <span class="header-section">강의실 시간표</span>
+      <span class="university"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m3 7 7-4 7 4M5 8v7m5-7v7m5-7v7M3 16h14"/></svg>삼육대학교</span>
+    </div>
+  </header>
+
+  <main class="container" id="main">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-copy">
+        <p class="eyebrow">A LITTLE SPACE FOR YOUR DAY</p>
+        <h1 id="page-title">공강 사이, 머물 곳을 찾아요<span>.</span></h1>
+        <p class="intro-description">건물과 강의실을 선택하고, 수업이 없는 시간을 확인하세요.</p>
+      </div>
+      <div class="intro-illustration" aria-hidden="true">
+        <div class="illustration-calendar"><div class="illustration-days"><i></i><i></i><i></i></div><div class="illustration-grid"><b></b><b></b><b></b><b></b><b></b><b></b></div></div>
+        <span class="illustration-check">✓</span>
+      </div>
+    </section>
+
+    <div class="demo-notice"><span class="demo-label">DEMO</span><p>화면을 미리 살펴보세요. 건물·강의실·수업은 <strong>예시 데이터</strong>입니다.</p></div>
+
+    <section class="filters panel" aria-labelledby="filters-title">
+      <div class="panel-label"><span class="step-number">01</span><h2 id="filters-title">어느 강의실을 찾으세요?</h2></div>
+      <div class="filter-fields">
+        <div class="field"><label for="building">건물</label><div class="select-wrap"><select id="building" aria-controls="room timetable"><option>불러오는 중</option></select></div></div>
+        <div class="field"><label for="room">강의실</label><div class="select-wrap"><select id="room" aria-controls="timetable"><option>건물을 선택해 주세요</option></select></div></div>
+        <div class="field semester-field"><label for="semester">기준 학기</label><input id="semester" readonly aria-readonly="true"></div>
+      </div>
+      <p class="filter-hint"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>강의실을 선택하면 시간표가 바로 바뀌어요.</p>
+    </section>
+
+    <section class="schedule panel" aria-labelledby="schedule-title">
+      <div class="schedule-top">
+        <div><p class="schedule-eyebrow">주간 강의실 시간표</p><h2 id="schedule-title">강의실을 선택해 주세요</h2><p class="schedule-meta" id="schedule-meta"></p></div>
+        <div class="view-badge"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="14" height="13" rx="2"/><path d="M6 2v4m8-4v4M3 9h14"/></svg>월–금 주간 보기</div>
+      </div>
+      <div class="schedule-toolbar">
+        <ul class="legend" aria-label="시간표 범례">
+          <li><span class="legend-dot lesson-dot" aria-hidden="true"></span>정규 수업</li>
+          <li><span class="legend-dot gap-dot" aria-hidden="true"></span>수업 미배정</li>
+          <li><span class="legend-dot pending-dot" aria-hidden="true"></span>자료 없음</li>
+        </ul>
+        <span class="range-label">예시 표시 범위 · 09:00–18:00</span>
+      </div>
+      <div class="day-buttons" id="day-buttons" role="group" aria-label="표시할 요일"></div>
+      <div class="timetable" id="timetable" aria-label="월요일부터 금요일까지 강의실 시간표"></div>
+      <div class="empty-state" id="empty-state" hidden><span class="empty-symbol" aria-hidden="true">!</span><h3 id="empty-title"></h3><p id="empty-description"></p><button type="button" id="retry" hidden>다시 확인하기</button></div>
+      <div class="schedule-caption"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 9v5m0-8v.2"/></svg><p>수업 미배정은 정규 수업이 없는 시간이에요. 실제 사용 여부와 공간 이용 조건은 별도 확인이 필요해요.</p></div>
+      <p class="sr-only" id="selection-status" role="status"></p>
+    </section>
+
+    <noscript><div class="panel noscript">시간표를 확인하려면 브라우저의 JavaScript를 켜 주세요.</div></noscript>
+    <footer class="page-footer"><p><strong>Campus Flow</strong><span>공강을 더 여유롭게.</span></p><span>삼육대학교 학생 프로젝트 · 예시 데이터 기반</span></footer>
+  </main>
+</body>
+</html>
