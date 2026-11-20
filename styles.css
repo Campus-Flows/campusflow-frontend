@@ -194,7 +194,7 @@ button, select { cursor: pointer; }
 .day:last-child .day-heading { border-top-right-radius: 12px; }
 .axis-heading { color: #64748b; font-size: 10px; }
 .times, .day-slots { position: relative; height: var(--day-height); }
-.day-slots { background: repeating-linear-gradient(to bottom, transparent 0 calc(var(--day-height) / 9 - 1px), #eff2f6 calc(var(--day-height) / 9 - 1px) calc(var(--day-height) / 9)); }
+.day-slots { background: repeating-linear-gradient(to bottom, transparent 0 calc(var(--day-height) / var(--display-hours, 9) - 1px), #eff2f6 calc(var(--day-height) / var(--display-hours, 9) - 1px) calc(var(--day-height) / var(--display-hours, 9))); }
 .time-label { position: absolute; right: 11px; transform: translateY(-50%); color: #63718a; font-size: 10px; font-variant-numeric: tabular-nums; }
 .time-label:first-child { transform: translateY(4px); }
 .time-label:last-child { transform: translateY(calc(-100% - 4px)); }
@@ -214,6 +214,10 @@ button, select { cursor: pointer; }
 }
 .slot.lesson { border: 1px solid #d6e4ff; border-left: 3px solid #7ea6ec; background: #edf3ff; color: #254a85; }
 .slot.gap { border: 1px solid #dfeee5; background: #f0f8f3; color: #3b7457; }
+.slot.unknown { border: 1px dashed #c8cfd9; background: #f2f4f7; color: #606d80; }
+.unknown .slot-label { color: #606d80; }
+.demo-notice { flex-wrap: wrap; }
+.demo-notice a { margin-left: auto; white-space: nowrap; color: var(--primary); }
 .slot-label { color: #4e6c9e; font-size: 9px; font-weight: 500; }
 .gap .slot-label { color: #587c68; }
 .slot-title { max-width: 100%; font-size: 13px; font-weight: 650; letter-spacing: -.35px; line-height: 1.4; overflow-wrap: anywhere; }

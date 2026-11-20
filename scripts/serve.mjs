@@ -10,6 +10,8 @@ const assets = new Map([
   ['/index.html', ['index.html', 'text/html']],
   ['/styles.css', ['styles.css', 'text/css']],
   ['/app.js', ['app.js', 'text/javascript']],
+  ['/api.js', ['api.js', 'text/javascript']],
+  ['/config.js', ['config.js', 'text/javascript']],
   ['/demo-data.js', ['demo-data.js', 'text/javascript']],
   ['/schedule.js', ['schedule.js', 'text/javascript']],
   ['/favicon.svg', ['favicon.svg', 'image/svg+xml']],
