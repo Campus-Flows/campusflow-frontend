@@ -2,8 +2,12 @@ import { demoSchedule, weekdays } from './demo-data.js';
 import { buildDayBlocks, formatTime } from './schedule.js';
 import { createApi } from './api.js';
 import { config } from './config.js';
+import { demoMode, preserveModeLinks } from './feature-ui.js';
 
-const demo = new URLSearchParams(location.search).get('demo') === '1';
+const demo = demoMode;
+preserveModeLinks();
+const locationParams = new URLSearchParams(location.search);
+let linkedRoom = { building: locationParams.get('building'), room: locationParams.get('room') };
 const api = createApi(config.apiBaseUrl);
 const displayStart = 540;
 const displayEnd = demo ? 1080 : 1440;
@@ -145,6 +149,11 @@ async function updateRooms() {
     if (signal.aborted) return;
     rooms = loadedRooms;
     roomSelect.replaceChildren(...rooms.map(room => new Option(room.name, room.id)));
+    if (linkedRoom?.building === building.name) {
+      const target = rooms.find(room => room.name === linkedRoom.room);
+      if (target) roomSelect.value = target.id;
+      linkedRoom = null;
+    }
     roomSelect.disabled = rooms.length === 0;
     await renderSchedule();
   } catch (error) {
@@ -171,6 +180,8 @@ async function loadBuildings() {
       return;
     }
     buildingSelect.disabled = false;
+    const target = buildings.find(building => building.name === linkedRoom?.building);
+    if (target) buildingSelect.value = target.id;
     await updateRooms();
   } catch (error) {
     if (signal.aborted) return;
@@ -203,7 +214,10 @@ document.querySelector('#data-notice').textContent = demo
 document.querySelector('#mode-link').href = demo ? './' : '?demo=1';
 document.querySelector('#mode-link').textContent = demo ? '서버 자료 보기' : '예시 화면 보기';
 document.querySelector('#footer-source').textContent = `삼육대학교 학생 프로젝트 · ${demo ? '예시 데이터 기반' : '서버 시간표 기반'}`;
-buildingSelect.addEventListener('change', updateRooms);
+buildingSelect.addEventListener('change', () => {
+  linkedRoom = null;
+  updateRooms();
+});
 roomSelect.addEventListener('change', renderSchedule);
 document.querySelector('#retry').addEventListener('click', () => retryAction());
 loadBuildings();

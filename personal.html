@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2563eb">
+  <title>내 시간표 · Campus Flow</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="features.css">
+  <script type="module" src="personal.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 이동</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" data-mode-link aria-label="Campus Flow 홈">
+        <img class="brand-mark" src="favicon.svg" alt="">
+        <span>Campus<span class="brand-flow">Flow</span></span>
+      </a>
+      <nav class="feature-nav" aria-label="주 메뉴">
+        <a href="./" data-mode-link>강의실 시간표</a>
+        <a href="search.html" data-mode-link>빈 강의실 검색</a>
+        <a href="personal.html" data-mode-link aria-current="page">내 시간표</a>
+      </nav>
+      <span class="university">삼육대학교</span>
+    </div>
+  </header>
+  <main class="container feature-main" id="main">
+    <section class="feature-intro">
+      <h1>내 시간표</h1>
+      <p>수업을 등록하고, 다음 수업 전 공강에 머물 수 있는 강의실을 찾아보세요.</p>
+    </section>
+    <p class="demo-notice" id="feature-demo-notice" hidden>예시 데이터로 보는 화면입니다.</p>
+    <section class="panel feature-panel" aria-labelledby="entry-title">
+      <h2 id="entry-title">수업 등록</h2>
+      <p class="feature-note">시간표는 이 브라우저에 저장돼요.</p>
+      <form id="course-search" class="feature-form course-search">
+        <label class="feature-field">과목명 검색<input name="query" type="search" placeholder="예: 글쓰기" required></label>
+        <button class="primary-button" type="submit">과목 검색</button>
+      </form>
+      <p id="course-status" class="feature-feedback" role="status"></p>
+      <div id="course-results" class="course-results"></div>
+      <details id="manual-entry">
+        <summary>수업 직접 입력</summary>
+        <form id="lesson-form" class="feature-form manual-form" novalidate>
+          <label class="feature-field">과목명<input name="title" required></label>
+          <label class="feature-field">요일<span class="select-wrap"><select name="day"><option value="1">월요일</option><option value="2">화요일</option><option value="3">수요일</option><option value="4">목요일</option><option value="5">금요일</option></select></span></label>
+          <label class="feature-field">시간 입력 방식<span class="select-wrap"><select name="timeMode"><option value="period">교시 선택</option><option value="clock">시각 직접 입력</option></select></span></label>
+          <label class="feature-field" data-mode="period">시작 교시<span class="select-wrap"><select name="first"></select></span></label>
+          <label class="feature-field" data-mode="period">마지막 교시<span class="select-wrap"><select name="last"></select></span></label>
+          <label class="feature-field" data-mode="clock" hidden>시작 시각<input name="start" placeholder="09:00"></label>
+          <label class="feature-field" data-mode="clock" hidden>종료 시각<input name="end" placeholder="10:00"></label>
+          <label class="feature-field">건물 (선택)<input name="building" list="building-names" placeholder="예: 요한관"></label>
+          <label class="feature-field">강의실 (선택)<input name="room" list="room-names" placeholder="예: 223호"></label>
+          <datalist id="building-names"></datalist><datalist id="room-names"></datalist>
+          <div class="form-actions">
+            <button id="save-lesson" class="primary-button" type="submit">수업 추가</button>
+            <button id="cancel-edit" class="secondary-button" type="button" hidden>수정 취소</button>
+          </div>
+        </form>
+      </details>
+      <p id="lesson-feedback" class="feature-feedback" role="status"></p>
+    </section>
+    <div class="personal-layout">
+      <section class="panel feature-panel" aria-labelledby="lesson-title">
+        <h2 id="lesson-title">등록한 수업</h2>
+        <div id="lesson-list"></div>
+      </section>
+      <section class="panel feature-panel" aria-labelledby="gap-title">
+        <h2 id="gap-title">공강별 추천 강의실</h2>
+        <p class="feature-note">다음 수업 강의실과 같은 건물부터 표시해요. 입실 전 이용 가능 여부를 확인해 주세요.</p>
+        <div id="gap-list"></div>
+      </section>
+    </div>
+    <noscript><p class="panel noscript">이 기능을 사용하려면 JavaScript를 켜 주세요.</p></noscript>
+    <footer class="page-footer"><strong>Campus Flow</strong><span>삼육대학교 학생 프로젝트</span></footer>
+  </main>
+</body>
+</html>
