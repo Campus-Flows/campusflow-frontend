@@ -8,17 +8,22 @@
   <title>강의실 시간표 · Campus Flow</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="features.css">
   <script type="module" src="app.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">시간표로 이동</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="./" aria-label="Campus Flow 홈">
+      <a class="brand" href="./" data-mode-link aria-label="Campus Flow 홈">
         <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="currentColor"/><path d="M27 12H17a5 5 0 0 0-5 5v6a5 5 0 0 0 5 5h5M19 19h9m-9 5h7" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="28" cy="28" r="3" fill="#a5c5ff"/></svg>
         <span>Campus<span class="brand-flow">Flow</span></span>
       </a>
-      <span class="header-section">강의실 시간표</span>
+      <nav class="feature-nav" aria-label="주 메뉴">
+        <a href="./" data-mode-link aria-current="page">강의실 시간표</a>
+        <a href="search.html" data-mode-link>빈 강의실 검색</a>
+        <a href="personal.html" data-mode-link>내 시간표</a>
+      </nav>
       <span class="university"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m3 7 7-4 7 4M5 8v7m5-7v7m5-7v7M3 16h14"/></svg>삼육대학교</span>
     </div>
   </header>

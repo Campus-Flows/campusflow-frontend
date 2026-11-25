@@ -16,7 +16,28 @@ export function createApi(baseUrl, fetcher = fetch) {
     return response.json();
   }
 
+  async function searchRooms(path, { day, start, end, building, minHours }, signal) {
+    const params = { day, start, end };
+    if (building) params.building = building;
+    if (minHours !== undefined) params.minHours = minHours;
+    const data = await get(path, params, signal);
+    if (!Array.isArray(data.rooms)) throw new Error('강의실 검색 응답 형식을 확인해 주세요.');
+    return data;
+  }
+
+  function available(filters, signal) {
+    return searchRooms('rooms/available', filters, signal);
+  }
+
   return {
+    available,
+    continuous: (filters, signal) => searchRooms('rooms/continuous', filters, signal),
+    waiting: (filters, signal) => searchRooms('rooms/waiting', filters, signal),
+    async courses(query, signal) {
+      const data = await get('courses', { q: query }, signal);
+      if (!Array.isArray(data.courses)) throw new Error('과목 검색 응답 형식을 확인해 주세요.');
+      return data.courses;
+    },
     async buildings(signal) {
       const data = await get('buildings', {}, signal);
       if (!Array.isArray(data.buildings)) throw new Error('건물 응답 형식을 확인해 주세요.');
@@ -37,10 +58,9 @@ export function createApi(baseUrl, fetcher = fetch) {
         return Promise.all(blocks.map(async block => {
           if (block.kind === 'lesson') return block;
           try {
-            const result = await get('rooms/available', {
+            const result = await available({
               building, day, start: formatTime(block.start), end: formatTime(block.end),
             }, signal);
-            if (!Array.isArray(result.rooms)) throw new Error('검색 응답 형식 오류');
             if (result.rooms.some(item => item.building === building && item.room === room)) return block;
           } catch (error) {
             if (signal?.aborted || error.name === 'AbortError') throw error;

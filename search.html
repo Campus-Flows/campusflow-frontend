@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2563eb">
+  <title>빈 강의실 검색 · Campus Flow</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="features.css">
+  <script type="module" src="search.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 이동</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" data-mode-link aria-label="Campus Flow 홈">
+        <img class="brand-mark" src="favicon.svg" alt="">
+        <span>Campus<span class="brand-flow">Flow</span></span>
+      </a>
+      <nav class="feature-nav" aria-label="주 메뉴">
+        <a href="./" data-mode-link>강의실 시간표</a>
+        <a href="search.html" data-mode-link aria-current="page">빈 강의실 검색</a>
+        <a href="personal.html" data-mode-link>내 시간표</a>
+      </nav>
+      <span class="university">삼육대학교</span>
+    </div>
+  </header>
+  <main class="container feature-main" id="main">
+    <section class="feature-intro">
+      <h1>빈 강의실 검색</h1>
+      <p>요일과 원하는 시간을 선택해 정규 수업이 배정되지 않은 강의실을 찾아보세요.</p>
+    </section>
+    <p class="demo-notice" id="feature-demo-notice" hidden>예시 데이터로 보는 화면입니다.</p>
+    <section class="panel feature-panel" aria-labelledby="search-title">
+      <h2 id="search-title">검색 조건</h2>
+      <form id="room-search" class="feature-form room-search">
+        <label class="feature-field">요일<span class="select-wrap"><select name="day"></select></span></label>
+        <label class="feature-field">시작 시간<span class="select-wrap"><select name="start"></select></span></label>
+        <label class="feature-field">종료 시간<span class="select-wrap"><select name="end"></select></span></label>
+        <label class="feature-field">건물<span class="select-wrap"><select name="building"><option value="">전체 건물</option></select></span></label>
+        <label class="feature-field">미배정 조건<span class="select-wrap"><select name="minHours"><option value="0">선택한 시간 전체</option></select></span></label>
+        <button class="primary-button" type="submit">강의실 검색</button>
+      </form>
+      <div class="building-feedback">
+        <span id="search-building-status" role="status"></span>
+        <button id="retry-buildings" class="secondary-button" type="button" hidden>건물 다시 불러오기</button>
+      </div>
+    </section>
+    <section class="panel feature-panel" aria-labelledby="results-title">
+      <h2 id="results-title">검색 결과</h2>
+      <p id="search-feedback" class="feature-feedback" role="status">조건을 선택한 뒤 검색해 주세요.</p>
+      <p id="search-empty" class="feature-empty" hidden></p>
+      <ul id="search-results" class="search-results"></ul>
+      <p class="feature-note">정규 수업 시간표 기준이에요. 실제 사용·예약 여부는 별도 확인해 주세요.</p>
+    </section>
+    <noscript><p class="panel noscript">이 기능을 사용하려면 JavaScript를 켜 주세요.</p></noscript>
+    <footer class="page-footer"><strong>Campus Flow</strong><span>삼육대학교 학생 프로젝트</span></footer>
+  </main>
+</body>
+</html>

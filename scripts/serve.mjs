@@ -9,12 +9,23 @@ const assets = new Map([
   ['/', ['index.html', 'text/html']],
   ['/index.html', ['index.html', 'text/html']],
   ['/styles.css', ['styles.css', 'text/css']],
+  ['/features.css', ['features.css', 'text/css']],
   ['/app.js', ['app.js', 'text/javascript']],
   ['/api.js', ['api.js', 'text/javascript']],
   ['/config.js', ['config.js', 'text/javascript']],
   ['/demo-data.js', ['demo-data.js', 'text/javascript']],
   ['/schedule.js', ['schedule.js', 'text/javascript']],
   ['/favicon.svg', ['favicon.svg', 'image/svg+xml']],
+  ['/search.html', ['search.html', 'text/html']],
+  ['/personal.html', ['personal.html', 'text/html']],
+  ['/search.js', ['search.js', 'text/javascript']],
+  ['/personal.js', ['personal.js', 'text/javascript']],
+  ['/feature-ui.js', ['feature-ui.js', 'text/javascript']],
+  ['/feature-demo.js', ['feature-demo.js', 'text/javascript']],
+  ['/personal-timetable-model.mjs', ['personal-timetable-model.mjs', 'text/javascript']],
+  ['/room-ranking.mjs', ['room-ranking.mjs', 'text/javascript']],
+  ['/campus-locations.mjs', ['campus-locations.mjs', 'text/javascript']],
+  ['/locations.json', ['locations.json', 'application/json']],
 ]);
 
 const server = createServer(async (request, response) => {
