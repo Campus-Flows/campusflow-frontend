@@ -77,7 +77,7 @@ npm test
 ## 팀과 남은 확인 사항
 
 - 실제 시간표 JSON을 불러온 서버에서 건물명·강의실명·수업 시각·확인 불가 판정 대조
-- 백엔드 배포 HTTPS 주소와 프론트 배포 출처 공유 후 `apiBaseUrl`·`CAMPUS_CORS_ALLOWED_ORIGINS` 설정
+- 프론트 배포 주소를 공유하고 백엔드의 `CAMPUS_CORS_ALLOWED_ORIGINS`에 등록
 - 빈 구간 추가 호출을 줄이려면 주간 시간표 API에 요일·구간별 확인 상태를 포함하도록 후속 협의
 - 이 프론트에는 관리용 `/api/reload`, `/api/import` 호출을 추가하지 않습니다.
 
@@ -90,4 +90,6 @@ Campus Flow에 맞춰 파란색 강조, 48px 입력창, 12px 모서리, 수업·
 
 ## Render 정적 배포
 
-Static Site에 이 레포의 배포할 브랜치를 연결합니다. Build Command는 `echo static-site`, Publish Directory는 `.`으로 설정합니다. 배포 전에 `config.js`의 API 주소를 백엔드 HTTPS 주소로 바꾸고 백엔드 CORS에 프론트 출처를 등록합니다. 이 구성은 빌드 도구가 없으므로 Render 환경 변수만 추가해도 브라우저의 `config.js` 값이 자동 변경되지는 않습니다. 실제 배포와 실데이터 통합 검증은 아직 하지 않았습니다.
+Render Static Site에 이 저장소의 `main` 브랜치를 연결합니다. Build Command는 `echo static-site`, Publish Directory는 `.`으로 설정합니다. 배포 모드의 `config.js`는 [Render 백엔드](https://campusflow-hc83.onrender.com/api/buildings)를 사용합니다. 로컬 호스트에서 실행하면 기존 로컬 API 주소를 사용합니다.
+
+배포 후 Render가 발급한 프론트 HTTPS 주소를 백엔드 팀에 공유해 `CAMPUS_CORS_ALLOWED_ORIGINS`에 추가합니다. 그런 다음 프론트 주소를 `?demo=1` 없이 열고 실제 건물 목록, 시간대 검색, 연속 검색, 내 시간표 저장·추천을 확인합니다.
